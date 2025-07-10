@@ -1,5 +1,6 @@
 use std::env;
 
+// For styling terminal output
 #[allow(unused)]
 mod ansi {
     pub const RESET: &str     = "\x1b[0m";
