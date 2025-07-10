@@ -1,23 +1,7 @@
+mod term_print;
+
 use std::env;
-
-// For styling terminal output
-#[allow(unused)]
-mod ansi {
-    pub const RESET: &str     = "\x1b[0m";
-    pub const BOLD: &str      = "\x1b[1m";
-    pub const ITALIC: &str    = "\x1b[3m";
-    pub const UNDERLINE: &str = "\x1b[4m";
-
-    pub const BLACK: &str     = "\x1b[30m";
-    pub const RED: &str       = "\x1b[31m";
-    pub const GREEN: &str     = "\x1b[32m";
-    pub const YELLOW: &str    = "\x1b[33m";
-    pub const BLUE: &str      = "\x1b[34m";
-    pub const MAGENTA: &str   = "\x1b[35m";
-    pub const CYAN: &str      = "\x1b[36m";
-    pub const WHITE: &str     = "\x1b[37m";
-}
-pub use ansi::{BOLD, RESET, ITALIC};
+use term_print::ansi;
 
 fn main() {
     // Receive arguments
@@ -33,8 +17,8 @@ fn main() {
         println!(r"   \ \ \L\ \/\ \L\ \/\ \L\ \ \ \_ ");
         println!(r"    \ \____/\ \____/\ \____/\ \__\");
         println!(r"     \/___/  \/___/  \/___/  \/__/");
-        println!("{BOLD}Boot -- Your Personal Project Manager CLI Tool {RESET}");
-        println!("Run {ITALIC} boot help {RESET} to get info on commands");
+        println!("{}Boot -- Your Personal Project Manager CLI Tool {}", ansi::BOLD, ansi::RESET);
+        println!("Run {} boot help {} to get info on commands", ansi::ITALIC, ansi::RESET);
     }
     // == 1 ARGUMENT
     // == 2+ ARGUMENTS
