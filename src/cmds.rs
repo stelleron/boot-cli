@@ -19,7 +19,8 @@ pub mod boot {
         // Git commands
         Commit{message: String},
         Clone{repo: String},
-        // Invalid
+        // Errors
+        IncorrectUsage,
         Invalid,
     }
 }
@@ -31,7 +32,7 @@ where
     args.get(2)
         .cloned()
         .map(f)
-        .unwrap_or(boot::Command::Invalid)
+        .unwrap_or(boot::Command::IncorrectUsage)
 }
 
 
