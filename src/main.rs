@@ -1,7 +1,7 @@
 mod term_print;
 mod cmds;
 
-use std::{default, env};
+use std::{env};
 use term_print::ansi;
 use cmds::{boot, fetch_cmd};
 
@@ -24,8 +24,8 @@ fn main() {
         boot::Command::Invalid => {
             println!("{}{}Error: Command not valid!{}", ansi::BOLD, ansi::RED, ansi::RESET);
         }
-        other => {
-
+        _other => {
+            println!("[Stable] OK")
         }
     };
 }
