@@ -36,7 +36,29 @@ fn main() {
         }
         // Git
         boot::Command::Commit { message } => {
+            // git add .
+            let status = Command::new("git")
+                .arg("add")
+                .arg(".")
+                .status()
+                .expect("Failed to run git add");
+            assert!(status.success(), "git add failed");
 
+            // git commit -m "message"
+            let status = Command::new("git")
+                .arg("commit")
+                .arg("-m")
+                .arg(message)
+                .status()
+                .expect("Failed to run git commit");
+            assert!(status.success(), "git commit failed");
+
+            // git push
+            let status = Command::new("git")
+                .arg("push")
+                .status()
+                .expect("Failed to run git push");
+            assert!(status.success(), "git push failed");
         }
         // Errors
         boot::Command::Invalid => {
