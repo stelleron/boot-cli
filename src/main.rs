@@ -68,11 +68,18 @@ fn main() {
             println!("{}Boot Version {}{}", ansi::BOLD, VERSION, ansi::RESET);
         }
         boot::Command::Update => {
-            set_current_dir(BOOT_DIR);
+            set_current_dir(BOOT_DIR).expect("Unable to set current directory!");
             Command::new("cargo")
                     .arg("build")
                     .status()
                     .expect("Unable to recompile Boot!");
+        }
+        boot::Command::SelfOpen => {
+            set_current_dir(BOOT_DIR).expect("Unable to set current directory!");
+            Command::new("code")
+                    .arg(".")
+                    .status()
+                    .expect("Unable to open Boot!");
         }
         // Git
         boot::Command::Commit { message } => {
@@ -101,7 +108,7 @@ fn main() {
             assert!(status.success(), "git push failed");
         }
         boot::Command::Clone { repo } => {
-            set_current_dir(BOOT_PROJECTS_DIR).expect("Unable to set current directory");
+            set_current_dir(BOOT_PROJECTS_DIR).expect("Unable to set current directory!");
             let mut repo_str = GITHUB_LINK.to_string();
             repo_str.push_str(&repo);
             Command::new("git")
