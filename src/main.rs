@@ -65,7 +65,7 @@ fn main() {
             println!("{}clone{}: Clone a project from your GitHub", ansi::BOLD, ansi::RESET);
         }
         boot::Command::Version => {
-            println!("{}Boot Version - {}{}", ansi::BOLD, VERSION, ansi::RESET);
+            println!("{}Boot Version {}{}", ansi::BOLD, VERSION, ansi::RESET);
         }
         // Git
         boot::Command::Commit { message } => {
@@ -109,10 +109,10 @@ fn main() {
             println!("{}{}Error: Command not valid!{}", ansi::BOLD, ansi::RED, ansi::RESET);
         }
         boot::Command::IncorrectUsage => {
-            println!("{}{}Error: Incorrect usage!{}", ansi::BOLD, ansi::RED, ansi::RESET)
+            println!("{}{}Error: Incorrect usage!{}", ansi::BOLD, ansi::RED, ansi::RESET);
         }
         _other => {
-            println!("[Stable] OK")
+            println!("{}{}Error: Not implemented yet!{}", ansi::BOLD, ansi::RED, ansi::RESET);
         }
     };
 }
