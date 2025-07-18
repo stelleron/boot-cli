@@ -67,6 +67,13 @@ fn main() {
         boot::Command::Version => {
             println!("{}Boot Version {}{}", ansi::BOLD, VERSION, ansi::RESET);
         }
+        boot::Command::Update => {
+            set_current_dir(BOOT_DIR);
+            Command::new("cargo")
+                    .arg("build")
+                    .status()
+                    .expect("Unable to recompile Boot!");
+        }
         // Git
         boot::Command::Commit { message } => {
             // git add .
