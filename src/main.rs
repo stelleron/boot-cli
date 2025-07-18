@@ -119,6 +119,20 @@ fn main() {
                     .status()
                     .expect("Unable to open your project!");
         }
+        boot::Command::Delete { name } => {
+            set_current_dir(BOOT_PROJECTS_DIR).expect("Unable to set current directory!");
+            Command::new("rm")
+                    .arg("-rf")
+                    .arg(&name)
+                    .status()
+                    .expect("Unable to delete your project!");
+        }
+        boot::Command::ListProjects => {
+            set_current_dir(BOOT_PROJECTS_DIR).expect("Unable to set current directory!");
+            Command::new("ls")
+                    .status()
+                    .expect("Unable to delete your project!");
+        }
         // Git
         boot::Command::Commit { message } => {
             // git add .
