@@ -110,7 +110,14 @@ fn main() {
             Command::new("code")
                     .arg(".")
                     .status()
-                    .expect("Unable to open Boot!");
+                    .expect("Unable to open your project!");
+        }
+        boot::Command::Open { name } => {
+            set_current_dir(BOOT_PROJECTS_DIR).expect("Unable to set current directory!");
+            Command::new("code")
+                    .arg(&name)
+                    .status()
+                    .expect("Unable to open your project!");
         }
         // Git
         boot::Command::Commit { message } => {
