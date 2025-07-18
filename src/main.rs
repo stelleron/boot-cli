@@ -10,7 +10,7 @@ use std::process::Command;
 use term_print::ansi;
 use cmds::{boot, fetch_cmd};
 
-const VERSION: &str = "0.1.0";
+const VERSION: &str = "0.2.0";
 const BOOT_DIR: &str = "/Users/donti/boot-rs/";
 const BOOT_PROJECTS_DIR: &str = "/Users/donti/boot-rs/projects/";
 const GITHUB_LINK: &str = "https://github.com/stelleron/";
