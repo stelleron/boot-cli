@@ -2,7 +2,8 @@ mod term_print;
 mod cmds;
 
 use std::env::set_current_dir;
-use std::{env};
+use std::{env, fs};
+use std::io::Write;
 use std::path::PathBuf;
 use std::process::Command;
 
@@ -76,6 +77,36 @@ fn main() {
         }
         boot::Command::SelfOpen => {
             set_current_dir(BOOT_DIR).expect("Unable to set current directory!");
+            Command::new("code")
+                    .arg(".")
+                    .status()
+                    .expect("Unable to open Boot!");
+        }
+        // Project
+        boot::Command::Create { name } => {
+            set_current_dir(BOOT_PROJECTS_DIR).expect("Unable to set current directory!");
+
+            fs::create_dir(&name).expect("Unable to create new project!");
+            set_current_dir(&name).expect("Unable to set current directory!");
+
+            let mut bootfile = fs::File::create_new(".boot").expect("Error in creating file!");
+            writeln!(bootfile, "./build/{}", name).expect("Failed to write to file");
+
+            fs::File::create_new("premake5.lua").expect("Error in creating files!");
+            fs::File::create_new(".gitignore").expect("Error in creating files!");
+
+            fs::create_dir("src").expect("Error in creating directory!");
+            fs::File::create_new("src/main.cpp").expect("Error in creating files!");
+            fs::create_dir("external").expect("Error in creating directory!");
+            fs::create_dir("external/include").expect("Error in creating directory!");
+            fs::create_dir("external/lib").expect("Error in creating directory!");
+            fs::create_dir("build").expect("Error in creating directory!");
+
+            Command::new("git")
+                    .arg("init")
+                    .status()
+                    .expect("Unable to initialize Git!");
+
             Command::new("code")
                     .arg(".")
                     .status()
