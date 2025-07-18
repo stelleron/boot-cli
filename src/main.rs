@@ -131,7 +131,42 @@ fn main() {
             set_current_dir(BOOT_PROJECTS_DIR).expect("Unable to set current directory!");
             Command::new("ls")
                     .status()
-                    .expect("Unable to delete your project!");
+                    .expect("Unable to list projects!");
+        }
+        // Build
+        boot::Command::Build => {
+            Command::new("premake5")
+                    .arg("gmake")
+                    .status()
+                    .expect("Unable to call Premake!");
+
+            Command::new("make")
+                    .status()
+                    .expect("Unable to Make project!");
+        }
+        boot::Command::Run => {
+            let run_inst = fs::read_to_string(".boot")
+                                    .expect("Failed to read .boot file!")
+                                    .replace("\n", "");
+            Command::new(run_inst)
+                    .status()
+                    .expect("Unable to run project!");
+        }
+        boot::Command::Test => {
+            Command::new("premake5")
+                    .arg("gmake")
+                    .status()
+                    .expect("Unable to call Premake!");
+
+            Command::new("make")
+                    .status()
+                    .expect("Unable to Make project!");
+            let run_inst = fs::read_to_string(".boot")
+                                    .expect("Failed to read .boot file!")
+                                    .replace("\n", "");
+            Command::new(run_inst)
+                    .status()
+                    .expect("Unable to run project!");
         }
         // Git
         boot::Command::Commit { message } => {
