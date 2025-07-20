@@ -133,6 +133,12 @@ fn main() {
                     .status()
                     .expect("Unable to list projects!");
         }
+        boot::Command::OpenProjects => {
+            Command::new("open")
+                    .arg(BOOT_PROJECTS_DIR)
+                    .status()
+                    .expect("Unable to list projects!");
+        }
         // Build
         boot::Command::Build => {
             Command::new("premake5")

@@ -12,6 +12,7 @@ pub mod boot {
         Open{name: String},
         Delete{name: String},
         ListProjects,
+        OpenProjects,
         // Build commands
         Run,
         Build,
@@ -51,6 +52,7 @@ pub fn fetch_cmd(args: Vec<String>) -> boot::Command {
         "open" => expect_second_arg(&args, |name| boot::Command::Open { name: name }),
         "delete" => expect_second_arg(&args, |name| boot::Command::Delete { name: name }),
         "listproj" => boot::Command::ListProjects,
+        "openproj" => boot::Command::OpenProjects,
         // Build
         "run" => boot::Command::Run,
         "build" => boot::Command::Build,
